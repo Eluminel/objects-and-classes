@@ -29,6 +29,10 @@ class Student:
                 f'\nЗавершенные курсы: {"".join(self.finished_courses)}').format(self=self)
 
 
+    def __lt__(self, other):
+        return self.average_student_grate() < other.average_student_grate()
+
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -52,6 +56,8 @@ class Lecturer(Mentor):
             summa += mark
         return summa / len(self.marks.items())
 
+    def __gt__(self, other):
+        return self.average_lecturer_grate() > other.average_lecturer_grate()
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -118,5 +124,11 @@ worst_student.rate_lecturer(lecturer_2,'Python', 7)
 average_rating([best_student, worst_student], 'Python')
 average_rating_lecturer([lecturer_1, lecturer_2], 'Python')
 
+print(best_student.average_student_grate())
+print(worst_student.average_student_grate())
+print(best_student > worst_student)
 
+print(lecturer_1.average_lecturer_grate())
+print(lecturer_2.average_lecturer_grate())
+print(lecturer_1 > lecturer_2)
 
